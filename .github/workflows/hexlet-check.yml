@@ -20,4 +20,3 @@ jobs:
         uses: hexlet/assignment-action@release
         with:
           hexlet_token: ${{ secrets.HEXLET_TOKEN }}
-          verbose: true
