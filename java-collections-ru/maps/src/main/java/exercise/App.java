@@ -20,6 +20,7 @@ class App {
             Integer count = result.getOrDefault(word, 0) + 1;
             result.put(word, count);
         }
+        
         return result;
     }
 
