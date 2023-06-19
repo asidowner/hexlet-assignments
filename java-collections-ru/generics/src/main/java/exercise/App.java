@@ -17,7 +17,7 @@ class App {
                 equals = book.get(condition.getKey()).equals(condition.getValue());
                 if (!equals) {
                     break;
-                };
+                }
             }
 
             if (equals) {
