@@ -1,6 +1,8 @@
 package exercise;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeSet;
 import java.util.function.Function;
 
 // BEGIN
