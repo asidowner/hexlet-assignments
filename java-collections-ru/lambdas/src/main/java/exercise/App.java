@@ -19,5 +19,6 @@ class App {
                 .flatMap(array -> Stream.of(array, array))
                 .toArray(String[][]::new);
     }
+
 }
 // END

@@ -20,5 +20,6 @@ class Sorter {
                 .map(user -> user.get("name"))
                 .collect(Collectors.toList());
     }
+
 }
 // END
