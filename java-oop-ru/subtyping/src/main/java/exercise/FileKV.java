@@ -7,7 +7,7 @@ import java.util.Map;
 class FileKV implements KeyValueStorage {
     private Path filePath;
 
-    public FileKV(Path filePath, Map<String, String> initValue) {
+    FileKV(Path filePath, Map<String, String> initValue) {
         this.filePath = filePath;
         this.save(initValue);
     }
