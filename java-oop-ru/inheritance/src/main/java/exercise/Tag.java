@@ -5,10 +5,8 @@ import java.util.Map;
 
 // BEGIN
 public abstract class Tag {
-    private final String TAG_FORMAT = "<%s%s>";
-    private final String ATTRIBUTE_FORMAT = " %s=\"%s\"";
-    private String tag;
-    private Map<String, String> attributes;
+    private final String tag;
+    private final Map<String, String> attributes;
 
     public Tag(String tag, Map<String, String> attributes) {
         this.tag = tag;
@@ -20,13 +18,15 @@ public abstract class Tag {
     }
 
     String getAttributesAsString() {
+        String attributeFormat = " %s=\"%s\"";
         return attributes.entrySet().stream()
-                .map(entry -> String.format(ATTRIBUTE_FORMAT, entry.getKey(), entry.getValue()))
+                .map(entry -> String.format(attributeFormat, entry.getKey(), entry.getValue()))
                 .collect(Collectors.joining(""));
     }
 
     public String toString() {
-        return String.format(TAG_FORMAT, tag, getAttributesAsString());
+        String tagFormat = "<%s%s>";
+        return String.format(tagFormat, tag, getAttributesAsString());
     }
 }
 // END
