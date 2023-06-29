@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 import java.util.Map;
 
 // BEGIN
-abstract class Tag {
+public abstract class Tag {
     private final String TAG_FORMAT = "<%s%s>";
     private final String ATTRIBUTE_FORMAT = " %s=\"%s\"";
     private String tag;
