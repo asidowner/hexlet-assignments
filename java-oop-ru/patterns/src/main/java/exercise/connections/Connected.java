@@ -2,7 +2,6 @@ package exercise.connections;
 
 import exercise.ConnectionContext;
 
-
 // BEGIN
 public class Connected implements Connection {
     @Override
