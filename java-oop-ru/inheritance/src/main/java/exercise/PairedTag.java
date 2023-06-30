@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 // BEGIN
 public class PairedTag extends Tag {
+    static final String TAG_FORMAT = "%s%s%s</%s>";
     private final String tagBody;
     private final List<Tag> children;
 
@@ -23,7 +24,6 @@ public class PairedTag extends Tag {
 
     @Override
     public String toString() {
-        String TAG_FORMAT = "%s%s%s</%s>";
         return String.format(
                 TAG_FORMAT,
                 super.toString(),
