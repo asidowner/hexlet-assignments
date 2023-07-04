@@ -15,7 +15,7 @@ class Validator {
         for (Field field : fields) {
             if (field.isAnnotationPresent(NotNull.class)) {
                 Object fieldData = getFieldData(field, object);
-                if (!validateNotNull(fieldData)) {
+                if (fieldData == null) {
                     notValidateFields.add(field.getName());
                 }
             }
@@ -28,19 +28,26 @@ class Validator {
 
         Field[] fields = object.getClass().getDeclaredFields();
         for (Field field : fields) {
-            Object fieldData = getFieldData(field, object);
-
-            if (field.isAnnotationPresent(NotNull.class)) {
-                if (!validateNotNull(fieldData)) {
-                    notValidateFields.put(field.getName(), List.of("can not be null"));
-                    continue;
-                }
+            if (field.getAnnotations().length == 0) {
+                continue;
             }
 
-            if (field.isAnnotationPresent(MinLength.class)) {
-                Integer minLength = field.getAnnotation(MinLength.class).minLength();
-                if (!validateMinLength(fieldData, minLength)) {
-                    notValidateFields.put(field.getName(), List.of(String.format("length less than %s", minLength)));
+            Object fieldData = getFieldData(field, object);
+
+            if (fieldData != null) {
+                if (field.isAnnotationPresent(MinLength.class)) {
+                    int minLength = field.getAnnotation(MinLength.class).minLength();
+
+                    if (fieldData.toString().length() < minLength) {
+                        notValidateFields.put(
+                                field.getName(),
+                                List.of(String.format("length less than %s", minLength))
+                        );
+                    }
+                }
+            } else {
+                if (field.isAnnotationPresent(NotNull.class)) {
+                    notValidateFields.put(field.getName(), List.of("can not be null"));
                 }
             }
         }
@@ -55,14 +62,6 @@ class Validator {
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private static Boolean validateNotNull(Object fieldData) {
-        return fieldData != null;
-    }
-
-    private static Boolean validateMinLength(Object fieldData, Integer minLength) {
-        return fieldData.toString().length() >= minLength;
     }
 }
 // END

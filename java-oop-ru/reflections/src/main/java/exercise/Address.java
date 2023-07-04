@@ -24,6 +24,7 @@ class Address {
     // END
     private String houseNumber;
 
+    @MinLength(minLength = 1)
     private String flatNumber;
 
     Address(String country, String city, String street, String houseNumber, String flatNumber) {
