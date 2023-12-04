@@ -30,7 +30,10 @@ public class SessionsController {
                     .check(UsersRepository::existsByName, LOGIN_FAILED_ERROR_MESSAGE)
                     .get();
             ctx.formParamAsClass("password", String.class)
-                    .check(pass -> UsersRepository.findByName(name).getPassword().equals(encrypt(pass)),
+                    .check(pass -> {
+                                var user = UsersRepository.findByName(name);
+                                return user != null && user.getPassword().equals(encrypt(pass));
+                            },
                             LOGIN_FAILED_ERROR_MESSAGE).get();
 
             ctx.sessionAttribute("name", name);
