@@ -32,7 +32,8 @@ public class SessionsController {
                                 var user = UsersRepository.findByName(name);
                                 return user != null && user.getPassword().equals(encrypt(pass));
                             },
-                            LOGIN_FAILED_ERROR_MESSAGE).get();
+                            LOGIN_FAILED_ERROR_MESSAGE)
+                    .get();
 
             ctx.sessionAttribute("name", name);
             ctx.redirect(NamedRoutes.rootPath());
