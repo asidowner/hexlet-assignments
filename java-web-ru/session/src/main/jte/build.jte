@@ -5,7 +5,7 @@
 @template.layout.page(
     content = @`
         <div class="mx-auto p-4 py-md-5">
-            @if(page.getError() != null)
+            @if(page.getErrors() != null)
                 <div class="mb-3">
                     <ul>
                         @for(var validator : page.getErrors().values())
@@ -20,7 +20,7 @@
                 <div class="mb-3">
                     <label class="form-label">
                     Nickname
-                    <input type="text" class="form-control" required name="name" value="page.getName()" />
+                    <input type="text" class="form-control" required name="name" value="${page.getName()}" />
                     </label>
                 </div>
                 <div class="mb-3">
@@ -29,7 +29,7 @@
                     <input type="password" class="form-control" required name="password" />
                     </label>
                 </div>
-                <input type="submit" class="btn btn-primary" value="Зарегистрировать" />
+                <input type="submit" class="btn btn-primary" value="Войти" />
             </form>
         </div>
     `

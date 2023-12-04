@@ -4,10 +4,15 @@
 
 @template.layout.page(
     content = @`
+    <div class="mx-auto p-4 py-md-5">
     @if(page.getName() == null)
         <a class="btn btn-primary btn-sm" href="${NamedRoutes.buildSessionPath()}">Войти</a>
     @else
-        <a class="btn btn-primary btn-sm" href="${NamedRoutes.logoutPath()}">Выйти</a>
+    <h3>Привет, ${String.valueOf(page.getName())}</h3>
+    <form action="${NamedRoutes.logoutPath()}" method="post">
+        <input type="submit" class="btn btn-primary btn-sm" value="Выйти" />
+    </form>
     @endif
+    </div>
     `
 )

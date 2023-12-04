@@ -25,8 +25,10 @@ public class SessionsController {
     }
 
     public static void create(Context ctx) {
-        var name = ctx.formParam("name");
         try {
+            var name = ctx.formParamAsClass("name", String.class)
+                    .check(UsersRepository::existsByName, LOGIN_FAILED_ERROR_MESSAGE)
+                    .get();
             ctx.formParamAsClass("password", String.class)
                     .check(pass -> UsersRepository.findByName(name).getPassword().equals(encrypt(pass)),
                             LOGIN_FAILED_ERROR_MESSAGE).get();
@@ -34,6 +36,7 @@ public class SessionsController {
             ctx.sessionAttribute("name", name);
             ctx.redirect(NamedRoutes.rootPath());
         } catch (ValidationException e) {
+            var name = ctx.formParam("name");
             var page = new LoginPage(name, e.getErrors());
             ctx.render("build.jte", Collections.singletonMap("page", page));
         }
