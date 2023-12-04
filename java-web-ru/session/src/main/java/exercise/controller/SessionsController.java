@@ -26,9 +26,7 @@ public class SessionsController {
 
     public static void create(Context ctx) {
         try {
-            var name = ctx.formParamAsClass("name", String.class)
-                    .check(UsersRepository::existsByName, LOGIN_FAILED_ERROR_MESSAGE)
-                    .get();
+            var name = ctx.formParam("name");
             ctx.formParamAsClass("password", String.class)
                     .check(pass -> {
                                 var user = UsersRepository.findByName(name);
