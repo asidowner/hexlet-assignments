@@ -31,13 +31,12 @@ public class UsersController {
                 .check(Objects::nonNull, "")
                 .get();
         var email = ctx.formParamAsClass("email", String.class)
-                .check(
-                        item -> UserRepository.getEntities()
+                .check(item -> UserRepository.getEntities()
                                 .stream()
-                                .filter(user -> user.getEmail().equals(item))
+                                .filter(user -> StringUtils.equalsIgnoreCase(user.getEmail(), item))
                                 .findAny()
-                                .isEmpty(), "Пользователь уже есть."
-                ).get();
+                                .isEmpty(), "Пользователь уже есть.")
+                .get();
         var password = ctx.formParamAsClass("password", String.class)
                 .check(Objects::nonNull, "")
                 .getOrThrow(ValidationException::new);
