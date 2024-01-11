@@ -24,9 +24,9 @@ public abstract class ProductMapper {
 
 
     @Mappings({
-            @Mapping(source = "title", target = "name"),
-            @Mapping(source = "price", target = "cost"),
-            @Mapping(source = "vendorCode", target = "barcode")
+        @Mapping(source = "title", target = "name"),
+        @Mapping(source = "price", target = "cost"),
+        @Mapping(source = "vendorCode", target = "barcode")
     })
     public abstract Product map(ProductCreateDTO dto);
 
@@ -35,9 +35,9 @@ public abstract class ProductMapper {
 
 
     @Mappings({
-            @Mapping(source = "name", target = "title"),
-            @Mapping(source = "cost", target = "price"),
-            @Mapping(source = "barcode", target = "vendorCode")
+        @Mapping(source = "name", target = "title"),
+        @Mapping(source = "cost", target = "price"),
+        @Mapping(source = "barcode", target = "vendorCode")
     })
     public abstract ProductDTO map(Product model);
 }
