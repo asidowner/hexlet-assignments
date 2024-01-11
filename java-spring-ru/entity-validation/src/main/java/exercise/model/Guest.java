@@ -11,6 +11,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.CreatedDate;
@@ -36,17 +37,23 @@ public class Guest {
 
     // BEGIN
     @NotBlank
+    @NotNull
     private String name;
 
+    @Column(unique = true)
     @Email
+    @NotNull
     private String email;
 
+    @NotNull
     @Pattern(regexp = "\\+(\\d){11,13}")
     private String phoneNumber;
 
+    @NotNull
     @Size(min = 4, max = 4)
     private String clubCard;
-    
+
+    @NotNull
     @Future
     private LocalDate cardValidUntil;
     // END
